@@ -1,6 +1,6 @@
 ﻿namespace ThirtyAnswers
 {
-    partial class frmMainBoard
+    partial class frmGameBoard
     {
         /// <summary>
         /// Required designer variable.
@@ -602,10 +602,11 @@
             this.tmrLoadBoard.Interval = 75;
             this.tmrLoadBoard.Tick += new System.EventHandler(this.tmrLoadBoard_Tick);
             // 
-            // frmMainBoard
+            // frmGameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel);
             this.DoubleBuffered = true;
@@ -613,11 +614,11 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmMainBoard";
+            this.Name = "frmGameBoard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thirty Answers";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmMainBoard_Load);
+            this.Load += new System.EventHandler(this.frmGameBoard_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
