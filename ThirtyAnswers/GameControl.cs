@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using ThirtyAnswers.Models;
@@ -19,6 +20,8 @@ namespace ThirtyAnswers
 
         private void frmGameControl_Load(object sender, EventArgs e)
         {
+            pnlGameStatus.BackColor = Color.FromArgb(128, 255, 255, 255);
+            pnlGameStatus.Visible = false;
             btnEnd.Enabled = false;
 
             try
@@ -81,6 +84,11 @@ namespace ThirtyAnswers
             _GameBoard.Game = game;
             _GameBoard.Show();
 
+            pnlGameStatus.Visible = true;
+            txtPlayer1.Enabled = false;
+            txtPlayer2.Enabled = false;
+            txtPlayer3.Enabled = false;
+            cmbGame.Enabled = false;
             btnEnd.Enabled = true;
             btnStart.Enabled = false;
         }
@@ -91,9 +99,21 @@ namespace ThirtyAnswers
             if (result == DialogResult.OK)
             {
                 _GameBoard.Close();
+                pnlGameStatus.Visible = false;
+                txtPlayer1.Enabled = true;
+                txtPlayer2.Enabled = true;
+                txtPlayer3.Enabled = true;
+                cmbGame.Enabled = true;
                 btnEnd.Enabled = false;
                 btnStart.Enabled = true;
             }
+        }
+
+        private void StartGame()
+        {
+        }
+        private void EndGame()
+        {
         }
     }
 }

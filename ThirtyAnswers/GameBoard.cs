@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using ThirtyAnswers.Helpers;
 using ThirtyAnswers.Models;
@@ -66,6 +67,14 @@ namespace ThirtyAnswers
             _AnswerLabelDisplayCount = -5;
             _AnswerLabels = ListHelper.ShuffleList(_AnswerLabels);
             tmrLoadBoard.Enabled = true;
+            lblPlayer1.Text = Game.Player1.Name;
+            lblPlayer1.Enabled = false;
+            lblPlayer2.Text = Game.Player2.Name;
+            lblPlayer3.Enabled = false;
+            lblPlayer3.Text = Game.Player3.Name;
+            lblPlayer3.Enabled = false;
+            prbTimer.Value = 0;
+            pnlAnswerDisplay.Visible = false;
         }
 
         public void LoadCategories()
@@ -76,6 +85,38 @@ namespace ThirtyAnswers
             lblCategory_4.Text = this.Game.Category4.Name.ToUpper();
             lblCategory_5.Text = this.Game.Category5.Name.ToUpper();
             lblCategory_6.Text = this.Game.Category6.Name.ToUpper();
+        }
+
+        private void lblAnswer_Click(object sender, EventArgs e)
+        {
+            Label lblAnswer = (Label)sender;
+            if (lblAnswer != null)
+            {
+                // TODO2023
+            }
+        }
+
+        private void lblAnswer_MouseEnter(object sender, EventArgs e)
+        {
+            Label lblAnswer = (Label)sender;
+            if (lblAnswer != null)
+            {
+                lblAnswer.ForeColor = Color.White;
+                lblAnswer.Cursor = Cursors.Default;
+                if (!string.IsNullOrEmpty(lblAnswer.Text))
+                {
+                    lblAnswer.Cursor = Cursors.Hand;
+                }
+            }
+        }
+
+        private void lblAnswer_MouseLeave(object sender, EventArgs e)
+        {
+            Label lblAnswer = (Label)sender;
+            if (lblAnswer != null)
+            {
+                lblAnswer.ForeColor = Color.FromArgb(215, 160, 74);
+            }
         }
     }
 }
