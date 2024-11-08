@@ -10,7 +10,8 @@ namespace ThirtyAnswers
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form form = new frmGameControl();
+            //Form form = new frmGameControl();
+            Form form =new BuzzerTest();
             Application.Run(form);
         }
     }
