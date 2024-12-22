@@ -68,6 +68,7 @@
       <DependentUpon>GameControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AudioHelper.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="GameBoard.cs">
       <SubType>Form</SubType>
@@ -75,8 +76,10 @@
     <Compile Include="GameBoard.Designer.cs">
       <DependentUpon>GameBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlayerRingInEventArgs.cs" />
     <Compile Include="Models\CategoryItem.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\AnswerSelectedEventArgs.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Program.cs" />

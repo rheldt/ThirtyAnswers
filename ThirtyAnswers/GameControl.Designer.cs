@@ -46,22 +46,24 @@
             this.btnMulti = new System.Windows.Forms.Button();
             this.btnWrong = new System.Windows.Forms.Button();
             this.btnCorrect = new System.Windows.Forms.Button();
-            this.lblCorrectResponse = new System.Windows.Forms.Label();
-            this.lblCorrectResponseTitle = new System.Windows.Forms.Label();
-            this.lblRingedIn = new System.Windows.Forms.Label();
-            this.lblRingedInTitle = new System.Windows.Forms.Label();
-            this.lblValueAndCategory = new System.Windows.Forms.Label();
-            this.lblValueAndCategoryTitle = new System.Windows.Forms.Label();
-            this.lblControlOfBoard = new System.Windows.Forms.Label();
-            this.lblControlOfBoardTitle = new System.Windows.Forms.Label();
+            this.lblQuestion = new System.Windows.Forms.Label();
+            this.lblQuestionTitle = new System.Windows.Forms.Label();
+            this.lblValue = new System.Windows.Forms.Label();
+            this.lblAnswer = new System.Windows.Forms.Label();
+            this.lblAnswerTitle = new System.Windows.Forms.Label();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.lblCategoryTitle = new System.Windows.Forms.Label();
             this.lblPlayer1Score = new System.Windows.Forms.Label();
             this.lblPlayer3Score = new System.Windows.Forms.Label();
             this.lblPlayer2Score = new System.Windows.Forms.Label();
+            this.lblValueTitle = new System.Windows.Forms.Label();
+            this.btnShowBoard = new System.Windows.Forms.Button();
             this.pnlGameStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtPlayer1
             // 
+            this.txtPlayer1.BackColor = System.Drawing.Color.White;
             this.txtPlayer1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlayer1.Location = new System.Drawing.Point(21, 96);
             this.txtPlayer1.Name = "txtPlayer1";
@@ -92,6 +94,7 @@
             // 
             // txtPlayer2
             // 
+            this.txtPlayer2.BackColor = System.Drawing.Color.White;
             this.txtPlayer2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlayer2.Location = new System.Drawing.Point(21, 167);
             this.txtPlayer2.Name = "txtPlayer2";
@@ -111,6 +114,7 @@
             // 
             // txtPlayer3
             // 
+            this.txtPlayer3.BackColor = System.Drawing.Color.White;
             this.txtPlayer3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlayer3.Location = new System.Drawing.Point(21, 238);
             this.txtPlayer3.Name = "txtPlayer3";
@@ -187,6 +191,7 @@
             // 
             // cmbGame
             // 
+            this.cmbGame.BackColor = System.Drawing.Color.White;
             this.cmbGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGame.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGame.FormattingEnabled = true;
@@ -199,28 +204,30 @@
             // pnlGameStatus
             // 
             this.pnlGameStatus.BackColor = System.Drawing.Color.White;
+            this.pnlGameStatus.Controls.Add(this.btnShowBoard);
             this.pnlGameStatus.Controls.Add(this.btnMulti);
             this.pnlGameStatus.Controls.Add(this.btnWrong);
             this.pnlGameStatus.Controls.Add(this.btnCorrect);
-            this.pnlGameStatus.Controls.Add(this.lblCorrectResponse);
-            this.pnlGameStatus.Controls.Add(this.lblCorrectResponseTitle);
-            this.pnlGameStatus.Controls.Add(this.lblRingedIn);
-            this.pnlGameStatus.Controls.Add(this.lblRingedInTitle);
-            this.pnlGameStatus.Controls.Add(this.lblValueAndCategory);
-            this.pnlGameStatus.Controls.Add(this.lblValueAndCategoryTitle);
-            this.pnlGameStatus.Controls.Add(this.lblControlOfBoard);
-            this.pnlGameStatus.Controls.Add(this.lblControlOfBoardTitle);
+            this.pnlGameStatus.Controls.Add(this.lblQuestion);
+            this.pnlGameStatus.Controls.Add(this.lblQuestionTitle);
+            this.pnlGameStatus.Controls.Add(this.lblValue);
+            this.pnlGameStatus.Controls.Add(this.lblValueTitle);
+            this.pnlGameStatus.Controls.Add(this.lblAnswer);
+            this.pnlGameStatus.Controls.Add(this.lblAnswerTitle);
+            this.pnlGameStatus.Controls.Add(this.lblCategory);
+            this.pnlGameStatus.Controls.Add(this.lblCategoryTitle);
             this.pnlGameStatus.Location = new System.Drawing.Point(320, 0);
             this.pnlGameStatus.Name = "pnlGameStatus";
-            this.pnlGameStatus.Size = new System.Drawing.Size(310, 480);
+            this.pnlGameStatus.Size = new System.Drawing.Size(470, 480);
             this.pnlGameStatus.TabIndex = 13;
+            this.pnlGameStatus.Visible = false;
             // 
             // btnMulti
             // 
             this.btnMulti.BackColor = System.Drawing.Color.Gray;
             this.btnMulti.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnMulti.ForeColor = System.Drawing.Color.White;
-            this.btnMulti.Location = new System.Drawing.Point(232, 410);
+            this.btnMulti.Location = new System.Drawing.Point(230, 410);
             this.btnMulti.Name = "btnMulti";
             this.btnMulti.Size = new System.Drawing.Size(50, 42);
             this.btnMulti.TabIndex = 12;
@@ -232,7 +239,7 @@
             this.btnWrong.BackColor = System.Drawing.Color.DarkRed;
             this.btnWrong.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnWrong.ForeColor = System.Drawing.Color.White;
-            this.btnWrong.Location = new System.Drawing.Point(126, 410);
+            this.btnWrong.Location = new System.Drawing.Point(124, 410);
             this.btnWrong.Name = "btnWrong";
             this.btnWrong.Size = new System.Drawing.Size(100, 42);
             this.btnWrong.TabIndex = 11;
@@ -244,99 +251,86 @@
             this.btnCorrect.BackColor = System.Drawing.Color.DarkGreen;
             this.btnCorrect.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnCorrect.ForeColor = System.Drawing.Color.White;
-            this.btnCorrect.Location = new System.Drawing.Point(20, 410);
+            this.btnCorrect.Location = new System.Drawing.Point(18, 410);
             this.btnCorrect.Name = "btnCorrect";
             this.btnCorrect.Size = new System.Drawing.Size(100, 42);
             this.btnCorrect.TabIndex = 10;
             this.btnCorrect.Text = "Correct";
             this.btnCorrect.UseVisualStyleBackColor = false;
             // 
-            // lblCorrectResponse
+            // lblQuestion
             // 
-            this.lblCorrectResponse.BackColor = System.Drawing.Color.Transparent;
-            this.lblCorrectResponse.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorrectResponse.Location = new System.Drawing.Point(15, 251);
-            this.lblCorrectResponse.Name = "lblCorrectResponse";
-            this.lblCorrectResponse.Size = new System.Drawing.Size(275, 135);
-            this.lblCorrectResponse.TabIndex = 9;
-            this.lblCorrectResponse.Text = "--";
+            this.lblQuestion.BackColor = System.Drawing.Color.Transparent;
+            this.lblQuestion.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblQuestion.Location = new System.Drawing.Point(15, 322);
+            this.lblQuestion.Name = "lblQuestion";
+            this.lblQuestion.Size = new System.Drawing.Size(435, 71);
+            this.lblQuestion.TabIndex = 9;
+            this.lblQuestion.Text = "--";
             // 
-            // lblCorrectResponseTitle
+            // lblQuestionTitle
             // 
-            this.lblCorrectResponseTitle.AutoSize = true;
-            this.lblCorrectResponseTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblCorrectResponseTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorrectResponseTitle.Location = new System.Drawing.Point(15, 223);
-            this.lblCorrectResponseTitle.Name = "lblCorrectResponseTitle";
-            this.lblCorrectResponseTitle.Size = new System.Drawing.Size(170, 28);
-            this.lblCorrectResponseTitle.TabIndex = 8;
-            this.lblCorrectResponseTitle.Text = "Correct Response";
+            this.lblQuestionTitle.AutoSize = true;
+            this.lblQuestionTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblQuestionTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionTitle.Location = new System.Drawing.Point(15, 293);
+            this.lblQuestionTitle.Name = "lblQuestionTitle";
+            this.lblQuestionTitle.Size = new System.Drawing.Size(91, 28);
+            this.lblQuestionTitle.TabIndex = 8;
+            this.lblQuestionTitle.Text = "Question";
             // 
-            // lblRingedIn
+            // lblValue
             // 
-            this.lblRingedIn.AutoSize = true;
-            this.lblRingedIn.BackColor = System.Drawing.Color.Transparent;
-            this.lblRingedIn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRingedIn.Location = new System.Drawing.Point(15, 183);
-            this.lblRingedIn.Name = "lblRingedIn";
-            this.lblRingedIn.Size = new System.Drawing.Size(28, 28);
-            this.lblRingedIn.TabIndex = 7;
-            this.lblRingedIn.Text = "--";
+            this.lblValue.AutoSize = true;
+            this.lblValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblValue.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblValue.Location = new System.Drawing.Point(381, 47);
+            this.lblValue.Name = "lblValue";
+            this.lblValue.Size = new System.Drawing.Size(28, 28);
+            this.lblValue.TabIndex = 7;
+            this.lblValue.Text = "--";
             // 
-            // lblRingedInTitle
+            // lblAnswer
             // 
-            this.lblRingedInTitle.AutoSize = true;
-            this.lblRingedInTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblRingedInTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRingedInTitle.Location = new System.Drawing.Point(15, 155);
-            this.lblRingedInTitle.Name = "lblRingedInTitle";
-            this.lblRingedInTitle.Size = new System.Drawing.Size(100, 28);
-            this.lblRingedInTitle.TabIndex = 6;
-            this.lblRingedInTitle.Text = "Ringed In";
+            this.lblAnswer.BackColor = System.Drawing.Color.Transparent;
+            this.lblAnswer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblAnswer.Location = new System.Drawing.Point(15, 115);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(435, 166);
+            this.lblAnswer.TabIndex = 5;
+            this.lblAnswer.Text = "--";
             // 
-            // lblValueAndCategory
+            // lblAnswerTitle
             // 
-            this.lblValueAndCategory.AutoSize = true;
-            this.lblValueAndCategory.BackColor = System.Drawing.Color.Transparent;
-            this.lblValueAndCategory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValueAndCategory.Location = new System.Drawing.Point(15, 115);
-            this.lblValueAndCategory.Name = "lblValueAndCategory";
-            this.lblValueAndCategory.Size = new System.Drawing.Size(28, 28);
-            this.lblValueAndCategory.TabIndex = 5;
-            this.lblValueAndCategory.Text = "--";
+            this.lblAnswerTitle.AutoSize = true;
+            this.lblAnswerTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblAnswerTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnswerTitle.Location = new System.Drawing.Point(15, 87);
+            this.lblAnswerTitle.Name = "lblAnswerTitle";
+            this.lblAnswerTitle.Size = new System.Drawing.Size(75, 28);
+            this.lblAnswerTitle.TabIndex = 4;
+            this.lblAnswerTitle.Text = "Answer";
             // 
-            // lblValueAndCategoryTitle
+            // lblCategory
             // 
-            this.lblValueAndCategoryTitle.AutoSize = true;
-            this.lblValueAndCategoryTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblValueAndCategoryTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValueAndCategoryTitle.Location = new System.Drawing.Point(15, 87);
-            this.lblValueAndCategoryTitle.Name = "lblValueAndCategoryTitle";
-            this.lblValueAndCategoryTitle.Size = new System.Drawing.Size(164, 28);
-            this.lblValueAndCategoryTitle.TabIndex = 4;
-            this.lblValueAndCategoryTitle.Text = "Value / Category";
+            this.lblCategory.BackColor = System.Drawing.Color.Transparent;
+            this.lblCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblCategory.Location = new System.Drawing.Point(15, 47);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(360, 28);
+            this.lblCategory.TabIndex = 3;
+            this.lblCategory.Text = "--";
             // 
-            // lblControlOfBoard
+            // lblCategoryTitle
             // 
-            this.lblControlOfBoard.AutoSize = true;
-            this.lblControlOfBoard.BackColor = System.Drawing.Color.Transparent;
-            this.lblControlOfBoard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblControlOfBoard.Location = new System.Drawing.Point(15, 46);
-            this.lblControlOfBoard.Name = "lblControlOfBoard";
-            this.lblControlOfBoard.Size = new System.Drawing.Size(28, 28);
-            this.lblControlOfBoard.TabIndex = 3;
-            this.lblControlOfBoard.Text = "--";
-            // 
-            // lblControlOfBoardTitle
-            // 
-            this.lblControlOfBoardTitle.AutoSize = true;
-            this.lblControlOfBoardTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblControlOfBoardTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblControlOfBoardTitle.Location = new System.Drawing.Point(15, 18);
-            this.lblControlOfBoardTitle.Name = "lblControlOfBoardTitle";
-            this.lblControlOfBoardTitle.Size = new System.Drawing.Size(163, 28);
-            this.lblControlOfBoardTitle.TabIndex = 2;
-            this.lblControlOfBoardTitle.Text = "Control of Board";
+            this.lblCategoryTitle.AutoSize = true;
+            this.lblCategoryTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblCategoryTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoryTitle.Location = new System.Drawing.Point(15, 18);
+            this.lblCategoryTitle.Name = "lblCategoryTitle";
+            this.lblCategoryTitle.Size = new System.Drawing.Size(92, 28);
+            this.lblCategoryTitle.TabIndex = 2;
+            this.lblCategoryTitle.Text = "Category";
             // 
             // lblPlayer1Score
             // 
@@ -371,12 +365,36 @@
             this.lblPlayer2Score.Text = "$0";
             this.lblPlayer2Score.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // lblValueTitle
+            // 
+            this.lblValueTitle.AutoSize = true;
+            this.lblValueTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblValueTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValueTitle.Location = new System.Drawing.Point(381, 18);
+            this.lblValueTitle.Name = "lblValueTitle";
+            this.lblValueTitle.Size = new System.Drawing.Size(59, 28);
+            this.lblValueTitle.TabIndex = 6;
+            this.lblValueTitle.Text = "Value";
+            // 
+            // btnShowBoard
+            // 
+            this.btnShowBoard.BackColor = System.Drawing.Color.Gray;
+            this.btnShowBoard.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnShowBoard.ForeColor = System.Drawing.Color.White;
+            this.btnShowBoard.Location = new System.Drawing.Point(316, 410);
+            this.btnShowBoard.Name = "btnShowBoard";
+            this.btnShowBoard.Size = new System.Drawing.Size(134, 42);
+            this.btnShowBoard.TabIndex = 13;
+            this.btnShowBoard.Text = "Show Board";
+            this.btnShowBoard.UseVisualStyleBackColor = false;
+            // 
             // frmGameControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ThirtyAnswers.Properties.Resources.Background;
-            this.ClientSize = new System.Drawing.Size(622, 473);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(782, 473);
             this.Controls.Add(this.lblPlayer2Score);
             this.Controls.Add(this.lblPlayer3Score);
             this.Controls.Add(this.lblPlayer1Score);
@@ -424,19 +442,20 @@
         private System.Windows.Forms.Label lblGame;
         private System.Windows.Forms.ComboBox cmbGame;
         private System.Windows.Forms.Panel pnlGameStatus;
-        private System.Windows.Forms.Label lblControlOfBoardTitle;
-        private System.Windows.Forms.Label lblControlOfBoard;
-        private System.Windows.Forms.Label lblRingedIn;
-        private System.Windows.Forms.Label lblRingedInTitle;
-        private System.Windows.Forms.Label lblValueAndCategory;
-        private System.Windows.Forms.Label lblValueAndCategoryTitle;
-        private System.Windows.Forms.Label lblCorrectResponse;
-        private System.Windows.Forms.Label lblCorrectResponseTitle;
+        private System.Windows.Forms.Label lblCategoryTitle;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.Label lblValue;
+        private System.Windows.Forms.Label lblAnswer;
+        private System.Windows.Forms.Label lblAnswerTitle;
+        private System.Windows.Forms.Label lblQuestion;
+        private System.Windows.Forms.Label lblQuestionTitle;
         private System.Windows.Forms.Button btnCorrect;
         private System.Windows.Forms.Button btnWrong;
         private System.Windows.Forms.Button btnMulti;
         private System.Windows.Forms.Label lblPlayer1Score;
         private System.Windows.Forms.Label lblPlayer3Score;
         private System.Windows.Forms.Label lblPlayer2Score;
+        private System.Windows.Forms.Label lblValueTitle;
+        private System.Windows.Forms.Button btnShowBoard;
     }
 }

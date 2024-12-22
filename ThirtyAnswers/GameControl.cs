@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ThirtyAnswers.Helpers;
 using ThirtyAnswers.Models;
 
 namespace ThirtyAnswers
@@ -11,7 +12,8 @@ namespace ThirtyAnswers
     {
         private frmGameBoard _GameBoard;
 
-        private string _GamesDirectory = Path.GetDirectoryName(Application.StartupPath);
+        //private string _GamesDirectory = Path.GetDirectoryName(Application.StartupPath);
+        private string _GamesDirectory = "C:\\ThirtyAnswersGames";
 
         public frmGameControl()
         {
@@ -26,10 +28,10 @@ namespace ThirtyAnswers
 
             try
             {
-                string[] games = Directory.GetFiles(_GamesDirectory, "*.30a");
+                string[] games = Directory.GetFiles(_GamesDirectory, "*.30a.json");
                 foreach (string game in games)
                 {
-                    string gameName = Path.GetFileNameWithoutExtension(game);
+                    string gameName = Path.GetFileName(game).Replace(".30a.json", "");
                     cmbGame.Items.Add(gameName);
                 }
             }
@@ -47,7 +49,7 @@ namespace ThirtyAnswers
                 MessageBox.Show("Please enter names for each player.", this.Text);
                 return;
             }
-            
+
             // Make sure player names are unique
             if (txtPlayer1.Text.Trim() == txtPlayer2.Text.Trim() || txtPlayer1.Text.Trim() == txtPlayer3.Text.Trim() || txtPlayer2.Text.Trim() == txtPlayer3.Text.Trim())
             {
@@ -66,13 +68,15 @@ namespace ThirtyAnswers
             Game game = new Game();
             try
             {
-                string gameFile = Path.Combine(_GamesDirectory, cmbGame.SelectedItem.ToString() + ".30a");
+                string gameFile = Path.Combine(_GamesDirectory, cmbGame.SelectedItem.ToString() + ".30a.json");
                 string gameJson = File.ReadAllText(gameFile);
                 game = JsonConvert.DeserializeObject<Game>(gameJson);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to load game file: " + ex.Message, this.Text);
+                this.Close();
+                return;
             }
             game.Player1 = new Player(txtPlayer1.Text.Trim());
             game.Player2 = new Player(txtPlayer2.Text.Trim());
@@ -82,6 +86,8 @@ namespace ThirtyAnswers
             // Load and show game board
             _GameBoard = new frmGameBoard();
             _GameBoard.Game = game;
+            _GameBoard.AnswerSelected += GameBoard_AnswerSelected;
+            _GameBoard.PlayerRingIn += GameBoard_PlayerRingIn;
             _GameBoard.Show();
 
             pnlGameStatus.Visible = true;
@@ -91,6 +97,26 @@ namespace ThirtyAnswers
             cmbGame.Enabled = false;
             btnEnd.Enabled = true;
             btnStart.Enabled = false;
+        }
+
+        private void GameBoard_AnswerSelected(object sender, AnswerSelectedEventArgs e)
+        {
+            // Update status area
+            lblCategory.Text = e.CategoryName;
+            lblValue.Text = e.Amount.ToString("C0");
+            lblAnswer.Text = e.CategoryItem.Answer;
+            lblQuestion.Text = e.CategoryItem.Question;
+
+            // Reset active player
+            for (int i = 1; i <= 3; i++)
+            {
+                TextBox txtPlayer = ReflectionHelper.GetPropertyValue<TextBox>(this, "txtPlayer" + i);
+                txtPlayer.BorderStyle = BorderStyle.Fixed3D;
+                txtPlayer.BackColor = Color.White;
+            }
+        }
+        private void GameBoard_PlayerRingIn(object sender, PlayerRingInEventArgs e)
+        {
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
@@ -107,13 +133,6 @@ namespace ThirtyAnswers
                 btnEnd.Enabled = false;
                 btnStart.Enabled = true;
             }
-        }
-
-        private void StartGame()
-        {
-        }
-        private void EndGame()
-        {
         }
     }
 }

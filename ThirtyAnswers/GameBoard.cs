@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Windows.Forms;
 using ThirtyAnswers.Helpers;
@@ -9,6 +10,9 @@ namespace ThirtyAnswers
 {
     public partial class frmGameBoard : Form
     {
+        public event EventHandler<AnswerSelectedEventArgs> AnswerSelected;
+        public event EventHandler<PlayerRingInEventArgs> PlayerRingIn;
+
         private List<string> _AnswerLabels = new List<string> { "lblAnswer_1_1", "lblAnswer_1_2", "lblAnswer_1_3", "lblAnswer_1_4", "lblAnswer_1_5", "lblAnswer_2_1", "lblAnswer_2_2", "lblAnswer_2_3", "lblAnswer_2_4", "lblAnswer_2_5", "lblAnswer_3_1", "lblAnswer_3_2", "lblAnswer_3_3", "lblAnswer_3_4", "lblAnswer_3_5", "lblAnswer_4_1", "lblAnswer_4_2", "lblAnswer_4_3", "lblAnswer_4_4", "lblAnswer_4_5", "lblAnswer_5_1", "lblAnswer_5_2", "lblAnswer_5_3", "lblAnswer_5_4", "lblAnswer_5_5", "lblAnswer_6_1", "lblAnswer_6_2", "lblAnswer_6_3", "lblAnswer_6_4", "lblAnswer_6_5" };
         private int _AnswerLabelDisplayCount = 0;
         private readonly List<int> _AnswerSmallValues = new List<int> { 100, 200, 300, 400, 500 };
@@ -19,6 +23,7 @@ namespace ThirtyAnswers
         public frmGameBoard()
         {
             InitializeComponent();
+            ShowOnScreen(1);
         }
 
         private void frmGameBoard_Load(object sender, EventArgs e)
@@ -92,7 +97,21 @@ namespace ThirtyAnswers
             Label lblAnswer = (Label)sender;
             if (lblAnswer != null)
             {
-                // TODO2023
+                // Get the category and category item
+                string[] parts = lblAnswer.Name.Split('_');
+                Category selectedCategory = ReflectionHelper.GetPropertyValue<Category>(this.Game, "Category" + parts[1]);
+                CategoryItem selectedCategoryItem = ReflectionHelper.GetPropertyValue<CategoryItem>(selectedCategory, "Item" + parts[2]);
+
+                // Show game board
+                // TODO
+
+                // Send details to control window
+                OnAnswerSelected(new AnswerSelectedEventArgs
+                {
+                    CategoryName = selectedCategory.Name,
+                    Amount = (int)lblAnswer.Tag,
+                    CategoryItem = selectedCategoryItem 
+                });
             }
         }
 
@@ -116,6 +135,35 @@ namespace ThirtyAnswers
             if (lblAnswer != null)
             {
                 lblAnswer.ForeColor = Color.FromArgb(215, 160, 74);
+            }
+        }
+
+        private void OnAnswerSelected(AnswerSelectedEventArgs e)
+        {
+            AnswerSelected?.Invoke(this, e);
+        }
+
+        private void OnPlayerRingIn(PlayerRingInEventArgs e)
+        {
+            PlayerRingIn?.Invoke(this, e);
+        }
+
+        private void ShowOnScreen(int screenNumber)
+        {
+            Screen[] screens = Screen.AllScreens;
+            if (screenNumber >= 0 && screenNumber < screens.Length)
+            {
+                bool maximised = false;
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    maximised = true;
+                }
+                this.Location = screens[screenNumber].WorkingArea.Location;
+                if (maximised)
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
             }
         }
     }
