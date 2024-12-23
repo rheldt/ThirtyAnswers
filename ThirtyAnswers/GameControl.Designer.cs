@@ -43,12 +43,14 @@
             this.lblGame = new System.Windows.Forms.Label();
             this.cmbGame = new System.Windows.Forms.ComboBox();
             this.pnlGameStatus = new System.Windows.Forms.Panel();
-            this.btnMulti = new System.Windows.Forms.Button();
+            this.btnShowBoard = new System.Windows.Forms.Button();
+            this.btnDone = new System.Windows.Forms.Button();
             this.btnWrong = new System.Windows.Forms.Button();
             this.btnCorrect = new System.Windows.Forms.Button();
             this.lblQuestion = new System.Windows.Forms.Label();
             this.lblQuestionTitle = new System.Windows.Forms.Label();
             this.lblValue = new System.Windows.Forms.Label();
+            this.lblValueTitle = new System.Windows.Forms.Label();
             this.lblAnswer = new System.Windows.Forms.Label();
             this.lblAnswerTitle = new System.Windows.Forms.Label();
             this.lblCategory = new System.Windows.Forms.Label();
@@ -56,8 +58,6 @@
             this.lblPlayer1Score = new System.Windows.Forms.Label();
             this.lblPlayer3Score = new System.Windows.Forms.Label();
             this.lblPlayer2Score = new System.Windows.Forms.Label();
-            this.lblValueTitle = new System.Windows.Forms.Label();
-            this.btnShowBoard = new System.Windows.Forms.Button();
             this.pnlGameStatus.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +69,7 @@
             this.txtPlayer1.Name = "txtPlayer1";
             this.txtPlayer1.Size = new System.Drawing.Size(274, 34);
             this.txtPlayer1.TabIndex = 0;
+            this.txtPlayer1.Text = "One";
             // 
             // lblPlayer1
             // 
@@ -100,6 +101,7 @@
             this.txtPlayer2.Name = "txtPlayer2";
             this.txtPlayer2.Size = new System.Drawing.Size(274, 34);
             this.txtPlayer2.TabIndex = 1;
+            this.txtPlayer2.Text = "Two";
             // 
             // lblPlayer3
             // 
@@ -120,6 +122,7 @@
             this.txtPlayer3.Name = "txtPlayer3";
             this.txtPlayer3.Size = new System.Drawing.Size(274, 34);
             this.txtPlayer3.TabIndex = 2;
+            this.txtPlayer3.Text = "Three";
             // 
             // lblThirty
             // 
@@ -205,7 +208,7 @@
             // 
             this.pnlGameStatus.BackColor = System.Drawing.Color.White;
             this.pnlGameStatus.Controls.Add(this.btnShowBoard);
-            this.pnlGameStatus.Controls.Add(this.btnMulti);
+            this.pnlGameStatus.Controls.Add(this.btnDone);
             this.pnlGameStatus.Controls.Add(this.btnWrong);
             this.pnlGameStatus.Controls.Add(this.btnCorrect);
             this.pnlGameStatus.Controls.Add(this.lblQuestion);
@@ -222,17 +225,31 @@
             this.pnlGameStatus.TabIndex = 13;
             this.pnlGameStatus.Visible = false;
             // 
-            // btnMulti
+            // btnShowBoard
             // 
-            this.btnMulti.BackColor = System.Drawing.Color.Gray;
-            this.btnMulti.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.btnMulti.ForeColor = System.Drawing.Color.White;
-            this.btnMulti.Location = new System.Drawing.Point(230, 410);
-            this.btnMulti.Name = "btnMulti";
-            this.btnMulti.Size = new System.Drawing.Size(50, 42);
-            this.btnMulti.TabIndex = 12;
-            this.btnMulti.Text = "X";
-            this.btnMulti.UseVisualStyleBackColor = false;
+            this.btnShowBoard.BackColor = System.Drawing.Color.Gray;
+            this.btnShowBoard.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnShowBoard.ForeColor = System.Drawing.Color.White;
+            this.btnShowBoard.Location = new System.Drawing.Point(316, 410);
+            this.btnShowBoard.Name = "btnShowBoard";
+            this.btnShowBoard.Size = new System.Drawing.Size(134, 42);
+            this.btnShowBoard.TabIndex = 13;
+            this.btnShowBoard.Text = "Show Board";
+            this.btnShowBoard.UseVisualStyleBackColor = false;
+            this.btnShowBoard.Click += new System.EventHandler(this.btnShowBoard_Click);
+            // 
+            // btnDone
+            // 
+            this.btnDone.BackColor = System.Drawing.Color.Black;
+            this.btnDone.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnDone.ForeColor = System.Drawing.Color.White;
+            this.btnDone.Location = new System.Drawing.Point(230, 410);
+            this.btnDone.Name = "btnDone";
+            this.btnDone.Size = new System.Drawing.Size(80, 42);
+            this.btnDone.TabIndex = 12;
+            this.btnDone.Text = "Done";
+            this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // btnWrong
             // 
@@ -245,6 +262,7 @@
             this.btnWrong.TabIndex = 11;
             this.btnWrong.Text = "Wrong";
             this.btnWrong.UseVisualStyleBackColor = false;
+            this.btnWrong.Click += new System.EventHandler(this.btnWrong_Click);
             // 
             // btnCorrect
             // 
@@ -257,6 +275,7 @@
             this.btnCorrect.TabIndex = 10;
             this.btnCorrect.Text = "Correct";
             this.btnCorrect.UseVisualStyleBackColor = false;
+            this.btnCorrect.Click += new System.EventHandler(this.btnCorrect_Click);
             // 
             // lblQuestion
             // 
@@ -289,6 +308,17 @@
             this.lblValue.Size = new System.Drawing.Size(28, 28);
             this.lblValue.TabIndex = 7;
             this.lblValue.Text = "--";
+            // 
+            // lblValueTitle
+            // 
+            this.lblValueTitle.AutoSize = true;
+            this.lblValueTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblValueTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValueTitle.Location = new System.Drawing.Point(381, 18);
+            this.lblValueTitle.Name = "lblValueTitle";
+            this.lblValueTitle.Size = new System.Drawing.Size(59, 28);
+            this.lblValueTitle.TabIndex = 6;
+            this.lblValueTitle.Text = "Value";
             // 
             // lblAnswer
             // 
@@ -365,29 +395,6 @@
             this.lblPlayer2Score.Text = "$0";
             this.lblPlayer2Score.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lblValueTitle
-            // 
-            this.lblValueTitle.AutoSize = true;
-            this.lblValueTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblValueTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValueTitle.Location = new System.Drawing.Point(381, 18);
-            this.lblValueTitle.Name = "lblValueTitle";
-            this.lblValueTitle.Size = new System.Drawing.Size(59, 28);
-            this.lblValueTitle.TabIndex = 6;
-            this.lblValueTitle.Text = "Value";
-            // 
-            // btnShowBoard
-            // 
-            this.btnShowBoard.BackColor = System.Drawing.Color.Gray;
-            this.btnShowBoard.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.btnShowBoard.ForeColor = System.Drawing.Color.White;
-            this.btnShowBoard.Location = new System.Drawing.Point(316, 410);
-            this.btnShowBoard.Name = "btnShowBoard";
-            this.btnShowBoard.Size = new System.Drawing.Size(134, 42);
-            this.btnShowBoard.TabIndex = 13;
-            this.btnShowBoard.Text = "Show Board";
-            this.btnShowBoard.UseVisualStyleBackColor = false;
-            // 
             // frmGameControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -451,7 +458,7 @@
         private System.Windows.Forms.Label lblQuestionTitle;
         private System.Windows.Forms.Button btnCorrect;
         private System.Windows.Forms.Button btnWrong;
-        private System.Windows.Forms.Button btnMulti;
+        private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Label lblPlayer1Score;
         private System.Windows.Forms.Label lblPlayer3Score;
         private System.Windows.Forms.Label lblPlayer2Score;

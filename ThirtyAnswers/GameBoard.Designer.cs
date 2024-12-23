@@ -68,12 +68,11 @@
             this.lblAnswer_6_5 = new System.Windows.Forms.Label();
             this.tmrLoadBoard = new System.Windows.Forms.Timer(this.components);
             this.pnlAnswerDisplay = new System.Windows.Forms.Panel();
+            this.lblAnswerText = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lblPlayer1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPlayer2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPlayer3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.prbTimer = new System.Windows.Forms.ToolStripProgressBar();
-            this.lblAnswerText = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             this.pnlAnswerDisplay.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -713,6 +712,21 @@
             this.pnlAnswerDisplay.Size = new System.Drawing.Size(1067, 600);
             this.pnlAnswerDisplay.TabIndex = 1;
             // 
+            // lblAnswerText
+            // 
+            this.lblAnswerText.BackColor = System.Drawing.Color.Transparent;
+            this.lblAnswerText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAnswerText.Font = new System.Drawing.Font("Korinna BT", 80F);
+            this.lblAnswerText.ForeColor = System.Drawing.Color.White;
+            this.lblAnswerText.Location = new System.Drawing.Point(0, 0);
+            this.lblAnswerText.Margin = new System.Windows.Forms.Padding(0);
+            this.lblAnswerText.Name = "lblAnswerText";
+            this.lblAnswerText.Padding = new System.Windows.Forms.Padding(200, 0, 200, 0);
+            this.lblAnswerText.Size = new System.Drawing.Size(1067, 480);
+            this.lblAnswerText.TabIndex = 4;
+            this.lblAnswerText.Text = "TEXT";
+            this.lblAnswerText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // statusStrip
             // 
             this.statusStrip.AutoSize = false;
@@ -722,66 +736,45 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblPlayer1,
             this.lblPlayer2,
-            this.lblPlayer3,
-            this.prbTimer});
-            this.statusStrip.Location = new System.Drawing.Point(0, 526);
+            this.lblPlayer3});
+            this.statusStrip.Location = new System.Drawing.Point(0, 480);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1067, 74);
+            this.statusStrip.Size = new System.Drawing.Size(1067, 120);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 3;
             // 
             // lblPlayer1
             // 
             this.lblPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer1.Font = new System.Drawing.Font("Swiss 911 Compressed", 30F);
+            this.lblPlayer1.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
             this.lblPlayer1.ForeColor = System.Drawing.Color.White;
             this.lblPlayer1.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer1.Name = "lblPlayer1";
-            this.lblPlayer1.Size = new System.Drawing.Size(250, 74);
+            this.lblPlayer1.Size = new System.Drawing.Size(337, 120);
             this.lblPlayer1.Spring = true;
             this.lblPlayer1.Text = "PLAYER 1";
             // 
             // lblPlayer2
             // 
             this.lblPlayer2.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer2.Font = new System.Drawing.Font("Swiss 911 Compressed", 30F);
+            this.lblPlayer2.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
             this.lblPlayer2.ForeColor = System.Drawing.Color.White;
             this.lblPlayer2.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer2.Name = "lblPlayer2";
-            this.lblPlayer2.Size = new System.Drawing.Size(250, 74);
+            this.lblPlayer2.Size = new System.Drawing.Size(337, 120);
             this.lblPlayer2.Spring = true;
             this.lblPlayer2.Text = "PLAYER 2";
             // 
             // lblPlayer3
             // 
             this.lblPlayer3.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer3.Font = new System.Drawing.Font("Swiss 911 Compressed", 30F);
+            this.lblPlayer3.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
             this.lblPlayer3.ForeColor = System.Drawing.Color.White;
             this.lblPlayer3.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer3.Name = "lblPlayer3";
-            this.lblPlayer3.Size = new System.Drawing.Size(250, 74);
+            this.lblPlayer3.Size = new System.Drawing.Size(337, 120);
             this.lblPlayer3.Spring = true;
             this.lblPlayer3.Text = "PLAYER 3";
-            // 
-            // prbTimer
-            // 
-            this.prbTimer.Margin = new System.Windows.Forms.Padding(0);
-            this.prbTimer.Name = "prbTimer";
-            this.prbTimer.Size = new System.Drawing.Size(300, 74);
-            // 
-            // lblAnswerText
-            // 
-            this.lblAnswerText.BackColor = System.Drawing.Color.Transparent;
-            this.lblAnswerText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAnswerText.Font = new System.Drawing.Font("Korinna BT", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnswerText.ForeColor = System.Drawing.Color.White;
-            this.lblAnswerText.Location = new System.Drawing.Point(0, 0);
-            this.lblAnswerText.Name = "lblAnswerText";
-            this.lblAnswerText.Padding = new System.Windows.Forms.Padding(30, 0, 30, 0);
-            this.lblAnswerText.Size = new System.Drawing.Size(1067, 526);
-            this.lblAnswerText.TabIndex = 4;
-            this.lblAnswerText.Text = "TEXT";
-            this.lblAnswerText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmGameBoard
             // 
@@ -854,7 +847,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblPlayer1;
         private System.Windows.Forms.ToolStripStatusLabel lblPlayer2;
         private System.Windows.Forms.ToolStripStatusLabel lblPlayer3;
-        private System.Windows.Forms.ToolStripProgressBar prbTimer;
         private System.Windows.Forms.Label lblAnswerText;
     }
 }

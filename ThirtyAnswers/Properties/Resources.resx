@@ -133,6 +133,9 @@
   <data name="NewRound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NewRound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="RingIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RingIn.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TimesUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TimesUp.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

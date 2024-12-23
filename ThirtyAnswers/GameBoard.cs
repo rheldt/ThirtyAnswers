@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Drawing;
 using System.Windows.Forms;
 using ThirtyAnswers.Helpers;
 using ThirtyAnswers.Models;
+using ThirtyAnswers.Services;
 
 namespace ThirtyAnswers
 {
@@ -17,6 +17,8 @@ namespace ThirtyAnswers
         private int _AnswerLabelDisplayCount = 0;
         private readonly List<int> _AnswerSmallValues = new List<int> { 100, 200, 300, 400, 500 };
         private readonly List<int> _AnswerLargeValues = new List<int> { 200, 400, 600, 800, 1000 };
+        private BuzzerService _BuzzerService;
+        private Buzzer _ActivatedBuzzer;
 
         public Game Game { get; set; }
 
@@ -30,6 +32,11 @@ namespace ThirtyAnswers
         {
             LoadBoard();
             AudioHelper.PlayNewRound();
+        }
+
+        private void frmGameBoard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _BuzzerService.StopCapture();
         }
 
         private void tmrLoadBoard_Tick(object sender, EventArgs e)
@@ -67,18 +74,42 @@ namespace ThirtyAnswers
             }
         }
 
+        private void BuzzerService_BuzzerPressed(object sender, BuzzerButtonPressedEventArgs e)
+        {
+            if (_ActivatedBuzzer != Buzzer.None)
+            {
+                return;
+            }
+
+            Action buzzerAction = () =>
+            {
+                // Send ring in to control window
+                OnPlayerRingIn(new PlayerRingInEventArgs
+                {
+                    PlayerNumber = (int)e.Buzzer
+                });
+            };
+
+            if (this.InvokeRequired)
+            {
+                this.Invoke(buzzerAction);
+            }
+        }
+
         public void LoadBoard()
         {
             _AnswerLabelDisplayCount = -5;
             _AnswerLabels = ListHelper.ShuffleList(_AnswerLabels);
+            _ActivatedBuzzer = Buzzer.None;
+            _BuzzerService = new BuzzerService();
+            _BuzzerService.BuzzerPressed += BuzzerService_BuzzerPressed;
             tmrLoadBoard.Enabled = true;
-            lblPlayer1.Text = Game.Player1.Name;
+            lblPlayer1.Text = Game.Player1.Name.ToUpper();
             lblPlayer1.Enabled = false;
-            lblPlayer2.Text = Game.Player2.Name;
+            lblPlayer2.Text = Game.Player2.Name.ToUpper();
             lblPlayer3.Enabled = false;
-            lblPlayer3.Text = Game.Player3.Name;
+            lblPlayer3.Text = Game.Player3.Name.ToUpper();
             lblPlayer3.Enabled = false;
-            prbTimer.Value = 0;
             pnlAnswerDisplay.Visible = false;
         }
 
@@ -92,25 +123,43 @@ namespace ThirtyAnswers
             lblCategory_6.Text = this.Game.Category6.Name.ToUpper();
         }
 
+        public void HideAnswerDisplay()
+        {
+            // Hide answer display
+            lblAnswerText.Text = string.Empty;
+            pnlAnswerDisplay.Visible = false;
+
+            // Stop listining for buzzers
+            _BuzzerService.StopCapture();
+
+        }
+
         private void lblAnswer_Click(object sender, EventArgs e)
         {
             Label lblAnswer = (Label)sender;
-            if (lblAnswer != null)
+            if (lblAnswer != null && lblAnswer.Text.Length > 0)
             {
+                // Remove from gameboard
+                lblAnswer.Text = string.Empty;
+
                 // Get the category and category item
                 string[] parts = lblAnswer.Name.Split('_');
                 Category selectedCategory = ReflectionHelper.GetPropertyValue<Category>(this.Game, "Category" + parts[1]);
                 CategoryItem selectedCategoryItem = ReflectionHelper.GetPropertyValue<CategoryItem>(selectedCategory, "Item" + parts[2]);
 
-                // Show game board
-                // TODO
+                // Show answer display
+                lblAnswerText.Text = selectedCategoryItem.Answer;
+                pnlAnswerDisplay.Visible = true;
+
+                // Start listining for buzzers
+                _BuzzerService.StartCapture();
 
                 // Send details to control window
                 OnAnswerSelected(new AnswerSelectedEventArgs
                 {
                     CategoryName = selectedCategory.Name,
                     Amount = (int)lblAnswer.Tag,
-                    CategoryItem = selectedCategoryItem 
+                    CategoryItem = selectedCategoryItem
                 });
             }
         }

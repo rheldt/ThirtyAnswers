@@ -4,6 +4,6 @@ namespace ThirtyAnswers.Models
 {
     public class PlayerRingInEventArgs : EventArgs
     {
-        public string PlayerName { get; set; }
+        public int PlayerNumber { get; set; }
     }
 }

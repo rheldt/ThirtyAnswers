@@ -11,9 +11,15 @@ namespace ThirtyAnswers
     public partial class frmGameControl : Form
     {
         private frmGameBoard _GameBoard;
+        private string _GamesDirectory = "C:\\ThirtyAnswersGames"; // Path.GetDirectoryName(Application.StartupPath);
+        private int _Player1Score = 0;
+        private int _Player2Score = 0;
+        private int _Player3Score = 0;
 
-        //private string _GamesDirectory = Path.GetDirectoryName(Application.StartupPath);
-        private string _GamesDirectory = "C:\\ThirtyAnswersGames";
+        private string _ActiveCategoryName = string.Empty;
+        private int _ActiveAmount = 0;
+        private CategoryItem _ActiveCategoryItem;
+        private int _ActivePlayerNumber = 0;
 
         public frmGameControl()
         {
@@ -39,6 +45,12 @@ namespace ThirtyAnswers
             {
                 MessageBox.Show("Unable to find game files: " + ex.Message, this.Text);
             }
+
+            _ActiveCategoryName = string.Empty;
+            _ActiveAmount = 0;
+            _ActiveCategoryItem = null;
+            _ActivePlayerNumber = 0;
+            UpdateUI();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -101,22 +113,21 @@ namespace ThirtyAnswers
 
         private void GameBoard_AnswerSelected(object sender, AnswerSelectedEventArgs e)
         {
-            // Update status area
-            lblCategory.Text = e.CategoryName;
-            lblValue.Text = e.Amount.ToString("C0");
-            lblAnswer.Text = e.CategoryItem.Answer;
-            lblQuestion.Text = e.CategoryItem.Question;
-
-            // Reset active player
-            for (int i = 1; i <= 3; i++)
-            {
-                TextBox txtPlayer = ReflectionHelper.GetPropertyValue<TextBox>(this, "txtPlayer" + i);
-                txtPlayer.BorderStyle = BorderStyle.Fixed3D;
-                txtPlayer.BackColor = Color.White;
-            }
+            _ActiveCategoryName = e.CategoryName;
+            _ActiveAmount = e.Amount;
+            _ActiveCategoryItem = e.CategoryItem;
+            _ActivePlayerNumber = 0;
+            UpdateUI();
         }
+
         private void GameBoard_PlayerRingIn(object sender, PlayerRingInEventArgs e)
         {
+            if (_ActiveCategoryItem != null && _ActivePlayerNumber == 0)
+            {
+                _ActivePlayerNumber = e.PlayerNumber;
+                UpdateUI();
+                AudioHelper.PlayRingIn();
+            }
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
@@ -132,6 +143,69 @@ namespace ThirtyAnswers
                 cmbGame.Enabled = true;
                 btnEnd.Enabled = false;
                 btnStart.Enabled = true;
+            }
+        }
+
+        private void btnCorrect_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnWrong_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            _GameBoard.HideAnswerDisplay();
+            _ActiveCategoryName = string.Empty;
+            _ActiveAmount = 0;
+            _ActiveCategoryItem = null;
+            _ActivePlayerNumber = 0;
+            UpdateUI();
+        }
+
+        private void btnShowBoard_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void UpdateUI()
+        {
+            // Active player
+            txtPlayer1.BorderStyle = (_ActivePlayerNumber == 1 ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
+            txtPlayer1.BackColor = (_ActivePlayerNumber == 1 ? Color.Yellow : Color.White);
+            txtPlayer2.BorderStyle = (_ActivePlayerNumber == 2 ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
+            txtPlayer2.BackColor = (_ActivePlayerNumber == 2 ? Color.Yellow : Color.White);
+            txtPlayer3.BorderStyle = (_ActivePlayerNumber == 3 ? BorderStyle.FixedSingle : BorderStyle.Fixed3D);
+            txtPlayer3.BackColor = (_ActivePlayerNumber == 3 ? Color.Yellow : Color.White);
+
+            // Player scores
+            lblPlayer1Score.Text = _Player1Score.ToString("C0");
+            lblPlayer2Score.Text = _Player2Score.ToString("C0");
+            lblPlayer3Score.Text = _Player3Score.ToString("C0");
+
+            // Category name
+            lblCategory.Text = _ActiveCategoryName;
+
+            // Amount of active answer
+            if (_ActiveAmount > 0)
+            {
+                lblValue.Text = _ActiveAmount.ToString("C0");
+            }
+            else
+            {
+                lblValue.Text = string.Empty;
+            }
+
+            // Answer copy
+            if (_ActiveCategoryItem != null)
+            {
+                lblAnswer.Text = _ActiveCategoryItem.Answer;
+                lblQuestion.Text = _ActiveCategoryItem.Question;
+            }
+            else
+            {
+                lblAnswer.Text = string.Empty;
+                lblQuestion.Text = string.Empty;
             }
         }
     }
