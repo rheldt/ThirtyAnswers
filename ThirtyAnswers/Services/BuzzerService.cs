@@ -1,6 +1,7 @@
 ﻿using SharpDX.DirectInput;
 using System;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ThirtyAnswers.Services
 {
@@ -23,17 +24,25 @@ namespace ThirtyAnswers.Services
         {
             // Look for a Joystick
             Guid joystickGuid = Guid.Empty;
-            foreach (var deviceInstance in _DirectInput.GetDevices(DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
+            try
             {
-                joystickGuid = deviceInstance.InstanceGuid;
-            }
+                foreach (var deviceInstance in _DirectInput.GetDevices(DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
+                {
+                    joystickGuid = deviceInstance.InstanceGuid;
+                }
 
-            // Initialize the joystick
-            _Joystick = new Joystick(_DirectInput, joystickGuid);
-            _Joystick.Properties.BufferSize = 128;
-            _Joystick.Acquire();
-            _PollingThread = new Thread(new ThreadStart(PollBuzzer));
-            _PollingThread.Start();
+                // Initialize the joystick
+                _Joystick = new Joystick(_DirectInput, joystickGuid);
+                _Joystick.Properties.BufferSize = 128;
+                _Joystick.Acquire();
+                _PollingThread = new Thread(new ThreadStart(PollBuzzer));
+                _PollingThread.Start();
+            }
+            catch
+            {
+                MessageBox.Show("Unable to find buzzers.");
+                return;
+            }
 
             // Spin for a while waiting for the started thread to become alive
             while (!_PollingThread.IsAlive);

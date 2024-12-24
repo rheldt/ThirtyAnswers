@@ -138,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Background.png" />
-    <Content Include="Resources\RingIn.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

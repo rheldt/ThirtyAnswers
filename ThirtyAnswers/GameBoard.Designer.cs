@@ -746,33 +746,33 @@
             // lblPlayer1
             // 
             this.lblPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer1.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
+            this.lblPlayer1.Font = new System.Drawing.Font("Segoe UI Semibold", 49.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayer1.ForeColor = System.Drawing.Color.White;
             this.lblPlayer1.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer1.Name = "lblPlayer1";
-            this.lblPlayer1.Size = new System.Drawing.Size(337, 120);
+            this.lblPlayer1.Size = new System.Drawing.Size(350, 120);
             this.lblPlayer1.Spring = true;
             this.lblPlayer1.Text = "PLAYER 1";
             // 
             // lblPlayer2
             // 
             this.lblPlayer2.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer2.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
+            this.lblPlayer2.Font = new System.Drawing.Font("Segoe UI Semibold", 49.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayer2.ForeColor = System.Drawing.Color.White;
             this.lblPlayer2.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer2.Name = "lblPlayer2";
-            this.lblPlayer2.Size = new System.Drawing.Size(337, 120);
+            this.lblPlayer2.Size = new System.Drawing.Size(350, 120);
             this.lblPlayer2.Spring = true;
             this.lblPlayer2.Text = "PLAYER 2";
             // 
             // lblPlayer3
             // 
             this.lblPlayer3.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayer3.Font = new System.Drawing.Font("Swiss 911 Compressed", 54F);
+            this.lblPlayer3.Font = new System.Drawing.Font("Segoe UI Semibold", 49.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayer3.ForeColor = System.Drawing.Color.White;
             this.lblPlayer3.Margin = new System.Windows.Forms.Padding(0);
             this.lblPlayer3.Name = "lblPlayer3";
-            this.lblPlayer3.Size = new System.Drawing.Size(337, 120);
+            this.lblPlayer3.Size = new System.Drawing.Size(350, 120);
             this.lblPlayer3.Spring = true;
             this.lblPlayer3.Text = "PLAYER 3";
             // 

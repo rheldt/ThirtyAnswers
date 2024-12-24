@@ -125,8 +125,8 @@ namespace ThirtyAnswers
             if (_ActiveCategoryItem != null && _ActivePlayerNumber == 0)
             {
                 _ActivePlayerNumber = e.PlayerNumber;
+                _GameBoard.AcceptRingIn(e.PlayerNumber);
                 UpdateUI();
-                AudioHelper.PlayRingIn();
             }
         }
 
@@ -148,24 +148,60 @@ namespace ThirtyAnswers
 
         private void btnCorrect_Click(object sender, EventArgs e)
         {
+            if (_ActiveAmount > 0 && _ActivePlayerNumber > 0 && _ActiveCategoryItem != null)
+            {
+                switch (_ActivePlayerNumber)
+                {
+                    case 1:
+                        _Player1Score += _ActiveAmount;
+                        break;
+                    case 2:
+                        _Player2Score += _ActiveAmount;
+                        break;
+                    case 3:
+                        _Player3Score += _ActiveAmount;
+                        break;
+                }
+                btnDone_Click(sender, e);
+            }
         }
 
         private void btnWrong_Click(object sender, EventArgs e)
         {
+            if (_ActiveAmount > 0 && _ActivePlayerNumber > 0 && _ActiveCategoryItem != null)
+            {
+                switch (_ActivePlayerNumber)
+                {
+                    case 1:
+                        _Player1Score -= _ActiveAmount;
+                        break;
+                    case 2:
+                        _Player2Score -= _ActiveAmount;
+                        break;
+                    case 3:
+                        _Player3Score -= _ActiveAmount;
+                        break;
+                }
+                _GameBoard.AcceptRingIn(0);
+                _ActivePlayerNumber = 0;
+                UpdateUI();
+            }
+        }
+
+        private void btnTimeUp_Click(object sender, EventArgs e)
+        {
+            AudioHelper.PlayTimesUp();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
             _GameBoard.HideAnswerDisplay();
+            _GameBoard.AcceptRingIn(0);
             _ActiveCategoryName = string.Empty;
             _ActiveAmount = 0;
             _ActiveCategoryItem = null;
             _ActivePlayerNumber = 0;
             UpdateUI();
-        }
-
-        private void btnShowBoard_Click(object sender, EventArgs e)
-        {
         }
 
         private void UpdateUI()

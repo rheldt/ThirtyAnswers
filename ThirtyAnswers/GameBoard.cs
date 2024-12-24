@@ -105,11 +105,8 @@ namespace ThirtyAnswers
             _BuzzerService.BuzzerPressed += BuzzerService_BuzzerPressed;
             tmrLoadBoard.Enabled = true;
             lblPlayer1.Text = Game.Player1.Name.ToUpper();
-            lblPlayer1.Enabled = false;
             lblPlayer2.Text = Game.Player2.Name.ToUpper();
-            lblPlayer3.Enabled = false;
             lblPlayer3.Text = Game.Player3.Name.ToUpper();
-            lblPlayer3.Enabled = false;
             pnlAnswerDisplay.Visible = false;
         }
 
@@ -131,7 +128,34 @@ namespace ThirtyAnswers
 
             // Stop listining for buzzers
             _BuzzerService.StopCapture();
+        }
 
+        public void AcceptRingIn(int playerNumber)
+        {
+            if (playerNumber == 1)
+            {
+                lblPlayer1.BackColor = Color.DarkBlue;
+                lblPlayer2.BackColor = Color.Transparent;
+                lblPlayer3.BackColor = Color.Transparent;
+            }
+            else if (playerNumber == 2)
+            {
+                lblPlayer1.BackColor = Color.Transparent;
+                lblPlayer2.BackColor = Color.DarkGreen;
+                lblPlayer3.BackColor = Color.Transparent;
+            }
+            else if (playerNumber == 3)
+            {
+                lblPlayer1.BackColor = Color.Transparent;
+                lblPlayer2.BackColor = Color.Transparent;
+                lblPlayer3.BackColor = Color.DarkRed;
+            }
+            else
+            {
+                lblPlayer1.BackColor = Color.Transparent;
+                lblPlayer2.BackColor = Color.Transparent;
+                lblPlayer3.BackColor = Color.Transparent;
+            }
         }
 
         private void lblAnswer_Click(object sender, EventArgs e)

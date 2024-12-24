@@ -43,7 +43,7 @@
             this.lblGame = new System.Windows.Forms.Label();
             this.cmbGame = new System.Windows.Forms.ComboBox();
             this.pnlGameStatus = new System.Windows.Forms.Panel();
-            this.btnShowBoard = new System.Windows.Forms.Button();
+            this.btnTimeUp = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.btnWrong = new System.Windows.Forms.Button();
             this.btnCorrect = new System.Windows.Forms.Button();
@@ -207,7 +207,7 @@
             // pnlGameStatus
             // 
             this.pnlGameStatus.BackColor = System.Drawing.Color.White;
-            this.pnlGameStatus.Controls.Add(this.btnShowBoard);
+            this.pnlGameStatus.Controls.Add(this.btnTimeUp);
             this.pnlGameStatus.Controls.Add(this.btnDone);
             this.pnlGameStatus.Controls.Add(this.btnWrong);
             this.pnlGameStatus.Controls.Add(this.btnCorrect);
@@ -225,29 +225,29 @@
             this.pnlGameStatus.TabIndex = 13;
             this.pnlGameStatus.Visible = false;
             // 
-            // btnShowBoard
+            // btnTimeUp
             // 
-            this.btnShowBoard.BackColor = System.Drawing.Color.Gray;
-            this.btnShowBoard.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.btnShowBoard.ForeColor = System.Drawing.Color.White;
-            this.btnShowBoard.Location = new System.Drawing.Point(316, 410);
-            this.btnShowBoard.Name = "btnShowBoard";
-            this.btnShowBoard.Size = new System.Drawing.Size(134, 42);
-            this.btnShowBoard.TabIndex = 13;
-            this.btnShowBoard.Text = "Show Board";
-            this.btnShowBoard.UseVisualStyleBackColor = false;
-            this.btnShowBoard.Click += new System.EventHandler(this.btnShowBoard_Click);
+            this.btnTimeUp.BackColor = System.Drawing.Color.DimGray;
+            this.btnTimeUp.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnTimeUp.ForeColor = System.Drawing.Color.White;
+            this.btnTimeUp.Location = new System.Drawing.Point(230, 410);
+            this.btnTimeUp.Name = "btnTimeUp";
+            this.btnTimeUp.Size = new System.Drawing.Size(100, 42);
+            this.btnTimeUp.TabIndex = 14;
+            this.btnTimeUp.Text = "Time Up";
+            this.btnTimeUp.UseVisualStyleBackColor = false;
+            this.btnTimeUp.Click += new System.EventHandler(this.btnTimeUp_Click);
             // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.Color.Black;
             this.btnDone.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnDone.ForeColor = System.Drawing.Color.White;
-            this.btnDone.Location = new System.Drawing.Point(230, 410);
+            this.btnDone.Location = new System.Drawing.Point(350, 410);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(80, 42);
+            this.btnDone.Size = new System.Drawing.Size(100, 42);
             this.btnDone.TabIndex = 12;
-            this.btnDone.Text = "Done";
+            this.btnDone.Text = "Void";
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
@@ -463,6 +463,6 @@
         private System.Windows.Forms.Label lblPlayer3Score;
         private System.Windows.Forms.Label lblPlayer2Score;
         private System.Windows.Forms.Label lblValueTitle;
-        private System.Windows.Forms.Button btnShowBoard;
+        private System.Windows.Forms.Button btnTimeUp;
     }
 }

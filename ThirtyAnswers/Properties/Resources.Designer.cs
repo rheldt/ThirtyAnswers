@@ -112,15 +112,6 @@ namespace ThirtyAnswers.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream RingIn {
-            get {
-                return ResourceManager.GetStream("RingIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
         internal static System.IO.UnmanagedMemoryStream TimesUp {
             get {
                 return ResourceManager.GetStream("TimesUp", resourceCulture);

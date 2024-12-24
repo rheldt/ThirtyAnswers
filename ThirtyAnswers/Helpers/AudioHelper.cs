@@ -16,16 +16,6 @@ namespace ThirtyAnswers.Helpers
         }
 
         /// <summary>
-        /// Plays the sound that indicates someone rang in.
-        /// </summary>
-        public static void PlayRingIn()
-        {
-            Stream stream = Properties.Resources.RingIn;
-            SoundPlayer player = new SoundPlayer(stream);
-            player.Play();
-        }
-
-        /// <summary>
         /// Plays the sound that indicates times up.
         /// </summary>
         public static void PlayTimesUp()
